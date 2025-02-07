@@ -1,5 +1,6 @@
 import styles from './page.module.css'
 import {Button} from '../components/Button/Button'
+import { InputText } from '@/components/InputText/InputText'
 
 export default function Home() {
   return (
@@ -7,6 +8,13 @@ export default function Home() {
       <h1>Ofertify</h1>
       <Button text="button"> </Button>
       <Button text="search"> </Button>
+      <br/>
+      <br/>
+      <InputText/>
     </div>
+
+
   )
+
+
 }
