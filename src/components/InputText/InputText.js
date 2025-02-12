@@ -1,7 +1,28 @@
 import styles from "./InputText.module.css"
 
-export const InputText = () => {
+/**
+ * props: {
+ *   placeholder: string
+ *   label: string
+ *   id: string
+ * }
+ */
+
+export const InputText = (props) => {
     return (
-        <input className={styles.inputText} placeholder="Enter Text"/>
+        <div className={styles.inputContainer}>
+            {(props.label !== undefined) ? (
+                <label
+                    htmlFor={props.id}
+                    className={styles.inputLabel}
+                >{props.label}</label>
+            ) : null}
+            <input
+                id={props.id}
+                type="text"
+                className={styles.inputText}
+                placeholder={props.placeholder}
+            />
+        </div>
     )
 }

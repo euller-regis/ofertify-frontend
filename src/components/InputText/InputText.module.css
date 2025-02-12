@@ -1,3 +1,13 @@
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.inputLabel {
+    font-weight: bold;
+}
+
 .inputText {
     padding: 10px;
     font-family: Arial, sans-serif;
