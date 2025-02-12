@@ -1,6 +1,7 @@
 import styles from './page.module.css'
 import {Button} from '../components/Button/Button'
 import { InputText } from '@/components/InputText/InputText'
+import { Card } from '@/components/Card/Card'
 
 export default function Home() {
   return (
@@ -15,9 +16,13 @@ export default function Home() {
 
       <InputText />
 
-      <Button text="Primario" variant="primary"> </Button>
       <Button text="Secundario" variant="secondary"> </Button>
       <br/>
+      <Card>
+        <Button text="Primario" variant="primary" />
+      </Card>
+      <Card />
+      <Card />
       <br/>
     </div>
 
