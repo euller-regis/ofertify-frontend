@@ -15,8 +15,8 @@ export default function Home() {
 
       <InputText />
 
-      <Button variant="primary"> </Button>
-      <Button variant="secondary"> </Button>
+      <Button text="Primario" variant="primary"> </Button>
+      <Button text="Secundario" variant="secondary"> </Button>
       <br/>
       <br/>
     </div>
