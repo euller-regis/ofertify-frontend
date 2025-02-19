@@ -1,7 +1,11 @@
-.head{
+.head1{
     font-size: 1.5rem;
     font-weight: bold;
     font-family: Arial, sans-serif;
+}
+
+.head2{
+    
 }
 
 .body{

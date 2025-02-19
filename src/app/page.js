@@ -7,25 +7,29 @@ import { Text } from '@/components/Text/Text'
 export default function Home() {
   return (
     <div className={styles.page}>
-      <h1>Product ad creation</h1>
-
-      <InputText id="name" placeholder="Full name of the product" label="Name" />
-      <br/>
-      <InputText id="brand" placeholder="Example: Apple" label="Brand" />
-      <br/>
-      <InputText id="price" placeholder="Example: R$ 600,00" label="Price" />
-
-      <InputText />
-
-      <Button text="Secundario" variant="secondary"> </Button>
-      <br/>
       <Card>
-        <Button text="Primario" variant="primary" />
+        <Text variant="head">
+          Sell for Free on Our E-Commerce Platform
+        </Text>
+        <Text variant="body">
+          List your products and start selling without any fees.
+        </Text>
+        <Button text="Get Started" variant="primary"></Button>
       </Card>
-      <Card />
-      <Card />
-      <br/>
-      <Text variant="head">Test</Text>
+      <Card>
+        <Text variant="head">
+          Key Features
+        </Text>
+        <Text variant="body">100% free to use</Text>
+        <Text variant="body">Easy product listing</Text>
+        <Text variant="body">User friendly dashboard</Text>
+      </Card>
+      <Card>
+        <Text variant="head">
+          See How It Works
+        </Text>
+        <Text variant="body">Showcase</Text>
+      </Card>
     </div>
 
 
