@@ -2,6 +2,7 @@ import styles from './page.module.css'
 import {Button} from '../components/Button/Button'
 import { InputText } from '@/components/InputText/InputText'
 import { Card } from '@/components/Card/Card'
+import { Text } from '@/components/Text/Text'
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
       <Card />
       <Card />
       <br/>
+      <Text variant="head">Test</Text>
     </div>
 
 
