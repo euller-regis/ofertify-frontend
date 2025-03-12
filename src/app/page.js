@@ -8,17 +8,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 export default function Home() {
   return (
     <div className={styles.page}>
-      <Card>
-        <Text variant="head">
-          Sell for Free on Our E-Commerce Platform
-        </Text>
-        <Text variant="body">
-          List your products and start selling without any fees.
-        </Text>
-        <Button text="Get Started" variant="primary"></Button>
+      <Card className={styles.container}>
+          <Text variant="head_2">
+            Sell for Free on Our E-Commerce Platform
+          </Text>
+          <Text variant="body">
+            List your products and start selling without any fees.
+          </Text>
+          <Button text="Get Started" variant="primary"></Button>
       </Card>
-      <Card>
-        <Text variant="head">
+      <Card className={styles.container}>
+        <Text variant="head_2">
           Key Features
         </Text>
         <div className={styles.row}>
@@ -34,8 +34,8 @@ export default function Home() {
           <Text variant="body">User friendly dashboard</Text>
         </div>
       </Card>
-      <Card>
-        <Text variant="head">
+      <Card className={styles.container}>
+        <Text variant="head_2">
           See How It Works
         </Text>
         <Text variant="body">Showcase</Text>
