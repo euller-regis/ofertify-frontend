@@ -1,8 +1,9 @@
 import styles from './page.module.css'
 import {Button} from '../components/Button/Button'
-import { InputText } from '@/components/InputText/InputText'
 import { Card } from '@/components/Card/Card'
 import { Text } from '@/components/Text/Text'
+import { faLineChart, faList, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export default function Home() {
   return (
@@ -20,9 +21,18 @@ export default function Home() {
         <Text variant="head">
           Key Features
         </Text>
-        <Text variant="body">100% free to use</Text>
-        <Text variant="body">Easy product listing</Text>
-        <Text variant="body">User friendly dashboard</Text>
+        <div className={styles.row}>
+          <FontAwesomeIcon icon={faShoppingCart} className={styles.icon} />
+          <Text variant="body">100% free to use</Text>
+        </div>
+        <div className={styles.row}>
+          <FontAwesomeIcon icon={faList} className={styles.icon} />
+          <Text variant="body">Easy product listing</Text>
+        </div>
+        <div className={styles.row}>
+          <FontAwesomeIcon icon={faLineChart} className={styles.icon} />
+          <Text variant="body">User friendly dashboard</Text>
+        </div>
       </Card>
       <Card>
         <Text variant="head">
