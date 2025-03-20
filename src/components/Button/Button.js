@@ -5,6 +5,7 @@ export const Button = (props) => {
     return (
         <button
             className={`${styles.button} ${colorStyle}`}
+            onClick={props.onClick}
         >
             {props.text}
         </button>

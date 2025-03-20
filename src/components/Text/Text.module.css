@@ -1,11 +1,13 @@
-.head{
+.head_1 {
     font-size: 1.5rem;
     font-weight: bold;
-    font-family: Arial, sans-serif;
 }
 
-.body{
-    font-size: 1rem;
-    font-family: Arial, sans-serif;
+.head_2 {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
 
+.body {
+    font-size: 1rem;
 }
