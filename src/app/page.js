@@ -1,3 +1,4 @@
+'use client'
 import styles from './page.module.css'
 import {Button} from '../components/Button/Button'
 import { Card } from '@/components/Card/Card'
@@ -41,9 +42,5 @@ export default function Home() {
         <Text variant="body">Showcase</Text>
       </Card>
     </div>
-
-
   )
-
-
 }
