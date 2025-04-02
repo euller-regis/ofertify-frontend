@@ -1,0 +1,53 @@
+.header {
+    background-color: white;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.mainContent {
+    background-color: #eee;
+    padding: 32px;
+}
+
+.searchResults {
+    display: flex;
+    gap: 32px;
+}
+
+.filtersCard {
+    width: 300px;
+    height: 400px;
+}
+
+.productCardsGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    list-style-type: none;
+}
+
+.productCard {
+    width: 300px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.pagination {
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.footer {
+    background-color: white;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
