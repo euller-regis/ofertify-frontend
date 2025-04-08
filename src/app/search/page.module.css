@@ -4,7 +4,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
 }
 
 .mainContent {
@@ -20,6 +20,8 @@
 .filtersCard {
     width: 300px;
     height: 400px;
+    display: flex;
+    flex-direction: column;
 }
 
 .productCardsGrid {
@@ -50,4 +52,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.checkbox {
+    margin-right: 5px;
+}
+
+.input {
+    width: 400px;
 }
