@@ -10,7 +10,7 @@ import styles from "./InputText.module.css"
 
 export const InputText = (props) => {
     return (
-        <div className={styles.inputContainer}>
+        <div className={`${styles.inputContainer} ${props.className}`}>
             {(props.label !== undefined) ? (
                 <label
                     htmlFor={props.id}
