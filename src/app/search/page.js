@@ -4,6 +4,7 @@ import { Card } from "@/components/Card/Card";
 import { InputCheckBox } from '@/components/InputCheckBox/InputCheckBox';
 import { InputText } from '@/components/InputText/InputText';
 import { Text } from "@/components/Text/Text";
+import axios from 'axios';
 
 export default function Search() {
 
@@ -23,11 +24,17 @@ export default function Search() {
             </Card>
         </li>
     ))
+
+
+    axios.get('').then(response => {
+        console.log(response.data);
+    });
+
     return (
         <div>
             <header className={styles.header}>
                 <Text variant="head_1">Search Results</Text>
-                
+
                 <InputText placeholder="Search Products" className={styles.input}></InputText>
             </header>
             <div className={styles.mainContent}>
