@@ -5,24 +5,13 @@ import { InputCheckBox } from '@/components/InputCheckBox/InputCheckBox';
 import { InputText } from '@/components/InputText/InputText';
 import { Text } from "@/components/Text/Text";
 
+
 export default function Search() {
 
-    const response = [
-        { name: 'Magic deck', price: 90 },
-        { name: 'Vacuum robot', price: 300 },
-        { name: 'Desk', price: 45.50 },
-        { name: 'Pencil', price: 1.50 },
-        { name: 'iPhone', price: 4500.50 }
-    ]
-
-    const listItems = response.map((product) => (
-        <li key={product.name}>
-            <Card className={styles.productCard}>
-                <Text variant="head_2">{product.name}</Text>
-                <Text variant="body">R$ {product.price}</Text>
-            </Card>
-        </li>
-    ))
+    const axios = require('axios')
+      
+    console.log("test")
+    console.log(listItems.data)
 
     return (
         <div>
