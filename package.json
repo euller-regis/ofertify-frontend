@@ -6,6 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
+    "preinstall": "git config core.hooksPath hooks",
     "lint": "next lint --no-cache"
   },
   "dependencies": {
