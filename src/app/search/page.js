@@ -6,7 +6,6 @@ import { Card } from "@/components/Card/Card";
 import { InputCheckBox } from '@/components/InputCheckBox/InputCheckBox';
 import { InputText } from '@/components/InputText/InputText';
 import { Text } from "@/components/Text/Text";
-import { responseCookiesToRequestCookies } from 'next/dist/server/web/spec-extension/adapters/request-cookies';
 import { useEffect, useState } from 'react';
 
 
@@ -16,25 +15,18 @@ export default function Search() {
     
 
     const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         fetchData();
     }, []);
 
     const fetchData = async () => {
+        setLoading(true);
         const {data: response} = await axios.get("http://localhost:3002/products")
         setData(response);
+        setLoading(false);
     };
-
-    const listItems = data.map((product) => (
-        <li key={product.id}>
-            <Card className={styles.productCard}>
-                <Text variant="head_2">{product.product_name}</Text>
-                <img src={product.image_url} />
-                <Text variant="body">R$ {product.price}</Text>
-            </Card>
-        </li>
-    ) )
 
     return (
         <div>
@@ -53,8 +45,23 @@ export default function Search() {
                         <InputCheckBox label='Category 3'></InputCheckBox>
                     </Card>
 
-                    <ul className={styles.productCardsGrid}>
-                        {listItems}
+                    {loading === true ? 
+                    <div>
+                      <div className={styles.loader}/></div> : null
+                    
+                    }
+                    <ul className={styles.productCardsGrid}>{
+                        data.map((product) => (
+                            <li key={product.id}>
+                             <Card className={styles.productCard}>
+                                <Text variant="head_2">{product.product_name}</Text>
+                                <img src={product.image_url} />
+                                <Text variant="body">R$ {product.price}</Text>
+                            </Card>
+                            </li>
+                        ))
+                    }
+                        
                     </ul>
                 </div>
 
