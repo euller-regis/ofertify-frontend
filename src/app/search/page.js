@@ -1,17 +1,40 @@
+'use client'
+
 import styles from './page.module.css'
 import { Button } from "@/components/Button/Button";
 import { Card } from "@/components/Card/Card";
 import { InputCheckBox } from '@/components/InputCheckBox/InputCheckBox';
 import { InputText } from '@/components/InputText/InputText';
 import { Text } from "@/components/Text/Text";
+import { responseCookiesToRequestCookies } from 'next/dist/server/web/spec-extension/adapters/request-cookies';
+import { useEffect, useState } from 'react';
 
 
 export default function Search() {
 
     const axios = require('axios')
-      
-    console.log("test")
-    console.log(listItems.data)
+    
+
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const fetchData = async () => {
+        const {data: response} = await axios.get("http://localhost:3002/products")
+        setData(response);
+    };
+
+    const listItems = data.map((product) => (
+        <li key={product.id}>
+            <Card className={styles.productCard}>
+                <Text variant="head_2">{product.product_name}</Text>
+                <img src={product.image_url} />
+                <Text variant="body">R$ {product.price}</Text>
+            </Card>
+        </li>
+    ) )
 
     return (
         <div>
