@@ -1,28 +1,32 @@
+'use client'
+
 import styles from './page.module.css'
 import { Button } from "@/components/Button/Button";
 import { Card } from "@/components/Card/Card";
 import { InputCheckBox } from '@/components/InputCheckBox/InputCheckBox';
 import { InputText } from '@/components/InputText/InputText';
 import { Text } from "@/components/Text/Text";
+import { useEffect, useState } from 'react';
+
 
 export default function Search() {
 
-    const response = [
-        { name: 'Magic deck', price: 90 },
-        { name: 'Vacuum robot', price: 300 },
-        { name: 'Desk', price: 45.50 },
-        { name: 'Pencil', price: 1.50 },
-        { name: 'iPhone', price: 4500.50 }
-    ]
+    const axios = require('axios')
+    
 
-    const listItems = response.map((product) => (
-        <li key={product.name}>
-            <Card className={styles.productCard}>
-                <Text variant="head_2">{product.name}</Text>
-                <Text variant="body">R$ {product.price}</Text>
-            </Card>
-        </li>
-    ))
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const fetchData = async () => {
+        setLoading(true);
+        const {data: response} = await axios.get("http://localhost:3002/products")
+        setData(response);
+        setLoading(false);
+    };
 
     return (
         <div>
@@ -41,8 +45,23 @@ export default function Search() {
                         <InputCheckBox label='Category 3'></InputCheckBox>
                     </Card>
 
-                    <ul className={styles.productCardsGrid}>
-                        {listItems}
+                    {loading === true ? 
+                    <div>
+                      <div className={styles.loader}/></div> : null
+                    
+                    }
+                    <ul className={styles.productCardsGrid}>{
+                        data.map((product) => (
+                            <li key={product.id}>
+                             <Card className={styles.productCard}>
+                                <Text variant="head_2">{product.product_name}</Text>
+                                <img src={product.image_url} />
+                                <Text variant="body">R$ {product.price}</Text>
+                            </Card>
+                            </li>
+                        ))
+                    }
+                        
                     </ul>
                 </div>
 
