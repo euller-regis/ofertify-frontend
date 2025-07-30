@@ -9,6 +9,8 @@ import { Text } from "@/components/Text/Text";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const DEFAULT_IMAGE_URL =
     "https://www.publicdomainpictures.net/pictures/470000/velka/image-not-found.png";
@@ -21,6 +23,7 @@ export default function Search() {
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
+    const pageTotal = data ? data.page_total : undefined;
 
     useEffect(() => {
         fetchData();
@@ -30,16 +33,20 @@ export default function Search() {
         setLoading(true);
         let fullUrl = "http://localhost:3002/products";
         if (searchText != "") {
-            fullUrl += "?page=" + pageToFetch + "&search=" + searchText;
+            fullUrl += `?page=${pageToFetch}&search=${searchText}`;
         } else {
-            fullUrl += "?page=" + pageToFetch;
+            fullUrl += `?page=${pageToFetch}`;
         }
         const { data: response } = await axios.get(fullUrl);
         setData(response);
         setLoading(false);
     };
 
-    console.log(data);
+    const changePage = (toPage) => {
+        router.replace(`/search?page=${toPage}`);
+        setPage(toPage);
+        fetchData(toPage);
+    };
 
     return (
         <div>
@@ -103,46 +110,55 @@ export default function Search() {
                     ) : null}
                 </div>
 
-                <div className={styles.pagination}>
-                    {data ? (
-                        <div>
+                {data ? (
+                    <div className={styles.pagination}>
+                        <Button
+                            variant="primary"
+                            text={<FontAwesomeIcon icon={faAngleLeft} />}
+                            disabled={page === 1}
+                            onClick={() => changePage(page - 1)}
+                        />
+                        <Button
+                            text="1"
+                            variant={page === 1 ? "secondary" : "primary"}
+                            onClick={
+                                page === 1 ? undefined : () => changePage(1)
+                            }
+                        />
+                        {page >= 3 && page !== pageTotal ? (
+                            <Button text="..." disabled />
+                        ) : null}
+                        {pageTotal >= 3 ? (
                             <Button
-                                text="1"
-                                onClick={() => {
-                                    router.replace("/search?page=1");
-                                    setPage(1);
-                                    fetchData(1);
-                                }}
-                                disabled={page === 1}
+                                variant="secondary"
+                                text={
+                                    page > 1 && page < pageTotal ? page : "..."
+                                }
                             />
-                            {data.page_total != 1 ? (
-                                <Button
-                                    text={data.page_total}
-                                    onClick={() => {
-                                        router.replace(
-                                            "/search?page=" + data.page_total
-                                        );
-                                        setPage(data.page_total);
-                                        fetchData(data.page_total);
-                                    }}
-                                    disabled={page === data.page_total}
-                                />
-                            ) : null}
-                            {page < data.page_total ? (
-                                <Button
-                                    text="Next"
-                                    onClick={() => {
-                                        router.replace(
-                                            "/search?page=" + (page + 1)
-                                        );
-                                        setPage(page + 1);
-                                        fetchData(page + 1);
-                                    }}
-                                />
-                            ) : null}
-                        </div>
-                    ) : null}
-                </div>
+                        ) : null}
+                        {page !== 1 && page <= pageTotal - 2 ? (
+                            <Button text="..." disabled />
+                        ) : null}
+                        {pageTotal != 1 ? (
+                            <Button
+                                text={pageTotal}
+                                variant={
+                                    page === pageTotal ? "secondary" : "primary"
+                                }
+                                onClick={
+                                    page === pageTotal
+                                        ? undefined
+                                        : () => changePage(pageTotal)
+                                }
+                            />
+                        ) : null}
+                        <Button
+                            text={<FontAwesomeIcon icon={faAngleRight} />}
+                            disabled={page >= pageTotal}
+                            onClick={() => changePage(page + 1)}
+                        />
+                    </div>
+                ) : null}
             </div>
             <footer className={styles.footer}>
                 <Text variant="body">@ 2025 Ofertify</Text>
