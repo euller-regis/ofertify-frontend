@@ -7,7 +7,7 @@ export const Button = (props) => {
         <button
             className={`${styles.button} ${colorStyle} ${
                 props.disabled ? styles.disabled : ""
-            }`}
+            } ${props.onClick ? styles.pointer : ""}`}
             onClick={props.onClick}
             disabled={props.disabled}
         >
