@@ -5,6 +5,7 @@
     padding: 10px 20px;
     border-radius: 4px;
     border: none;
+    cursor: pointer
 }
 
 .primary {
@@ -13,4 +14,9 @@
 
 .secondary {
     background-color: #6c757d;
+}
+
+.disabled {
+    cursor: auto;
+    background-color: #ccc;
 }
