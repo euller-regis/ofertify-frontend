@@ -12,6 +12,9 @@
     padding: 32px;
 }
 
+.searchBar {
+    display: flex;
+}
 .searchResults {
     display: flex;
     gap: 32px;
