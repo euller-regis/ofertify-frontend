@@ -8,10 +8,11 @@ import { InputText } from "@/components/InputText/InputText";
 import { Text } from "@/components/Text/Text";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { SelectBox } from "@/components/SelectBox/SelectBox";
+import { buildQuerystring } from "../utils/url-utils";
 
 const DEFAULT_IMAGE_URL =
     "https://www.publicdomainpictures.net/pictures/470000/velka/image-not-found.png";
@@ -20,40 +21,58 @@ export default function Search() {
     const [data, setData] = useState();
     const [loading, setLoading] = useState(false);
     const [searchText, setSearchText] = useState("");
+    const [sortedBy, setSortedBy] = useState("name");
     const [page, setPage] = useState(1);
     const router = useRouter();
-    const pathname = usePathname();
-    const searchParams = useSearchParams();
     const pageTotal = data ? data.page_total : undefined;
-    let sortedBy = "name";
 
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [page, sortedBy]);
 
-    const fetchData = async (pageToFetch = 1) => {
+    const fetchData = async () => {
         setLoading(true);
         let fullUrl = "http://localhost:3002/products";
-        if (searchText != "") {
-            fullUrl += `?sort=${sortedBy}&page=${pageToFetch}&search=${searchText}`;
-        } else {
-            fullUrl += `?sort=${sortedBy}&page=${pageToFetch}`;
-        }
+        fullUrl += buildQuerystring({
+            sort: sortedBy,
+            page: page,
+            search: searchText,
+        });
         const { data: response } = await axios.get(fullUrl);
         setData(response);
         setLoading(false);
     };
 
     const changePage = (toPage) => {
-        router.replace(`/search?page=${toPage}`);
         setPage(toPage);
-        fetchData(toPage);
+        const queryString = buildQuerystring({
+            sort: sortedBy,
+            page: toPage,
+            search: searchText,
+        });
+        router.replace(`/search${queryString}`);
     };
 
     const changeSort = (event) => {
-        sortedBy = event.target.value;
-        router.replace(`/search?sort=${sortedBy}`);
+        setPage(1);
+        setSortedBy(event.target.value);
+        const queryString = buildQuerystring({
+            sort: event.target.value,
+            page: 1,
+            search: searchText,
+        });
+        router.replace(`/search${queryString}`);
+    };
+
+    const onSearchText = () => {
         fetchData();
+        setPage(1);
+        const queryString = buildQuerystring({
+            sort: sortedBy,
+            page: 1,
+            search: searchText,
+        });
+        router.replace(`/search${queryString}`);
     };
 
     return (
@@ -66,19 +85,10 @@ export default function Search() {
                         onChange={(event) => setSearchText(event.target.value)}
                         className={styles.input}
                         onKeyUp={(event) =>
-                            event.key === "Enter" && fetchData()
+                            event.key === "Enter" && onSearchText()
                         }
                     ></InputText>
-                    <Button
-                        text="Search"
-                        onClick={() => {
-                            fetchData();
-                            setPage(1);
-                            router.replace(
-                                "/search?page=1&search=" + searchText
-                            );
-                        }}
-                    />
+                    <Button text="Search" onClick={onSearchText} />
                 </div>
             </header>
             <SelectBox
