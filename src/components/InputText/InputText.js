@@ -23,6 +23,7 @@ export const InputText = (props) => {
                 className={styles.inputText}
                 placeholder={props.placeholder}
                 onChange={props.onChange}
+                onKeyUp={props.onKeyUp}
             />
         </div>
     );
