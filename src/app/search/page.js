@@ -11,6 +11,7 @@ import axios from "axios";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { SelectBox } from "@/components/SelectBox/SelectBox";
 
 const DEFAULT_IMAGE_URL =
     "https://www.publicdomainpictures.net/pictures/470000/velka/image-not-found.png";
@@ -24,6 +25,7 @@ export default function Search() {
     const pathname = usePathname();
     const searchParams = useSearchParams();
     const pageTotal = data ? data.page_total : undefined;
+    let sortedBy = "name";
 
     useEffect(() => {
         fetchData();
@@ -33,9 +35,9 @@ export default function Search() {
         setLoading(true);
         let fullUrl = "http://localhost:3002/products";
         if (searchText != "") {
-            fullUrl += `?page=${pageToFetch}&search=${searchText}`;
+            fullUrl += `?sort=${sortedBy}&page=${pageToFetch}&search=${searchText}`;
         } else {
-            fullUrl += `?page=${pageToFetch}`;
+            fullUrl += `?sort=${sortedBy}&page=${pageToFetch}`;
         }
         const { data: response } = await axios.get(fullUrl);
         setData(response);
@@ -48,6 +50,12 @@ export default function Search() {
         fetchData(toPage);
     };
 
+    const changeSort = (event) => {
+        sortedBy = event.target.value;
+        router.replace(`/search?sort=${sortedBy}`);
+        fetchData();
+    };
+
     return (
         <div>
             <header className={styles.header}>
@@ -57,6 +65,9 @@ export default function Search() {
                         placeholder="Search Products"
                         onChange={(event) => setSearchText(event.target.value)}
                         className={styles.input}
+                        onKeyUp={(event) =>
+                            event.key === "Enter" && fetchData()
+                        }
                     ></InputText>
                     <Button
                         text="Search"
@@ -70,6 +81,12 @@ export default function Search() {
                     />
                 </div>
             </header>
+            <SelectBox
+                onChange={(event) => {
+                    changeSort(event);
+                }}
+                options={data ? data.sortOptions : null}
+            ></SelectBox>
             <div className={styles.mainContent}>
                 <div className={styles.searchResults}>
                     <Card className={styles.filtersCard}>
