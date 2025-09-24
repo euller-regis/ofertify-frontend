@@ -23,6 +23,6 @@ describe("Button", () => {
             />
         );
         await userEvent.click(screen.getByRole("button"));
-        expect(mockFunction).toHaveBeenCalled();
+        expect(mockFunction).toHaveBeenCalledTimes(1);
     });
 });
