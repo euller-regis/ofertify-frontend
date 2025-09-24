@@ -11,3 +11,11 @@
 .body {
     font-size: 1rem;
 }
+
+.blue{
+    color: rgb(0, 140, 255);
+}
+
+.black{
+    color: black;
+}

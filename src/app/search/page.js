@@ -1,18 +1,19 @@
 "use client";
 
 import styles from "./page.module.css";
-import { Button } from "@/components/Button/Button";
-import { Card } from "@/components/Card/Card";
-import { InputCheckBox } from "@/components/InputCheckBox/InputCheckBox";
-import { InputText } from "@/components/InputText/InputText";
-import { Text } from "@/components/Text/Text";
+import { Button } from "../../components/Button/Button";
+import { Card } from "../../components/Card/Card";
+import { InputCheckBox } from "../../components/InputCheckBox/InputCheckBox";
+import { InputText } from "../../components/InputText/InputText";
+import { Text } from "../../components/Text/Text";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { SelectBox } from "@/components/SelectBox/SelectBox";
+import { SelectBox } from "../../components/SelectBox/SelectBox";
 import { buildQuerystring } from "../utils/url-utils";
+import { Loader } from "../../components/Loader/Loader";
 
 const DEFAULT_IMAGE_URL =
     "https://www.publicdomainpictures.net/pictures/470000/velka/image-not-found.png";
@@ -109,7 +110,7 @@ export default function Search() {
 
                     {loading === true ? (
                         <div>
-                            <div className={styles.loader} />
+                            <Loader />
                         </div>
                     ) : null}
 

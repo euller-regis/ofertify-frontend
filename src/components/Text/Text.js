@@ -1,14 +1,26 @@
-import styles from './Text.module.css'
+import styles from "./Text.module.css";
 
-export function Text(props){
-    const variants = ['body', 'head_1', 'head_2']
-    if (!variants.includes(props.variant)) {
-        throw new Error(`variant "${props.variant}" not supported!`)
+/*
+Props {
+    variant: 'body' | 'head_1' | 'head_2'
+    color: 'black' | 'blue'
+    children: ReactElement
+}
+*/
+
+export function Text(props) {
+    const { variant = "body", color = "black", children } = props;
+    const variants = ["body", "head_1", "head_2"];
+    const colors = ["black", "blue"];
+    if (!variants.includes(variant)) {
+        throw new Error(`variant "${variant}" not supported!`);
+    }
+    if (!colors.includes(color)) {
+        throw new Error(`color "${color}" not supported`);
     }
 
-    const textStyle = styles[props.variant]
+    const colorStyle = styles[color];
+    const textStyle = styles[variant];
 
-    return <span className={textStyle}>
-        {props.children}
-    </span>
+    return <span className={`${textStyle} ${colorStyle}`}>{children}</span>;
 }
