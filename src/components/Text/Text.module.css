@@ -13,9 +13,13 @@
 }
 
 .blue{
-    color: rgb(0, 140, 255);
+    color: var(--primary);
 }
 
 .black{
-    color: black;
+    color: var(--foreground);
+}
+
+.muted{
+    color: var(--text-muted);
 }
