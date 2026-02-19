@@ -8,7 +8,8 @@
     "start": "next start",
     "preinstall": "git config core.hooksPath hooks",
     "lint": "next lint --no-cache",
-    "test": "jest"
+    "test": "jest",
+    "export": "next build && next export"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
