@@ -25,7 +25,7 @@ export default function Home() {
       <Card />
       <Card />
       <br/>
-      <Text variant="head">Test</Text>
+      <Text variant="head_1">Test</Text>
     </div>
 
 
