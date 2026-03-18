@@ -25,14 +25,11 @@ export default function Product() {
 
     const params = useParams();
 
-    console.log(params);
-
     const fetchData = async () => {
         let url = "http://localhost:3002/products/" + params.slug;
         try {
             const { data: response } = await axios.get(url);
             setProduct(response);
-            console.log(response);
         } catch (error) {
             setProduct(null);
         }

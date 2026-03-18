@@ -40,8 +40,6 @@ export default function newProduct() {
         };
         try {
             const response = await axios.post('http://localhost:3002/products/new-product', formData);
-            console.log('Product created:', response.data);
-            // Optionally reset form or redirect
         } catch (error) {
             console.error('Error creating product:', error);
         }
