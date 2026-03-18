@@ -10,7 +10,7 @@ Props {
 
 export function Text(props) {
     const { variant = "body", color = "black", children } = props;
-    const variants = ["body", "head_1", "head_2"];
+    const variants = ["body", "head_1", "head_2", "head_3"];
     const colors = ["black", "blue"];
     if (!variants.includes(variant)) {
         throw new Error(`variant "${variant}" not supported!`);

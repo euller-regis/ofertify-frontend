@@ -9,6 +9,8 @@ import { Text } from "../../components/Text/Text";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
+import Link from "next/link";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { SelectBox } from "../../components/SelectBox/SelectBox";
@@ -117,11 +119,15 @@ export default function Search() {
                     {data ? (
                         <ul className={styles.productCardsGrid}>
                             {data.products.map((product) => (
-                                <li key={product.id}>
+                                <li key={product.slug}>
                                     <Card className={styles.productCard}>
-                                        <Text variant="head_2">
-                                            {product.product_name}
-                                        </Text>
+                                        <Link
+                                            href={`/products/${product.slug}`}
+                                        >
+                                            <Text variant="head_2">
+                                                {product.product_name}
+                                            </Text>
+                                        </Link>
                                         <img
                                             src={
                                                 product.image_url ||
