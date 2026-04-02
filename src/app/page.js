@@ -3,6 +3,7 @@ import styles from "./page.module.css";
 import { Button } from "../components/Button/Button";
 import { Card } from "../components/Card/Card";
 import { Text } from "../components/Text/Text";
+import ThemeToggle from "../components/ThemeToggle/ThemeToggle";
 import {
     faLineChart,
     faList,
@@ -13,6 +14,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function Home() {
     return (
         <div className={styles.page}>
+            <div className={styles.header}>
+                <ThemeToggle />
+            </div>
             <Card className={styles.container}>
                 <Text variant="head_2">
                     Sell for Free on Our E-Commerce Platform
